@@ -5,7 +5,7 @@
   "main": "changed.js",
   "scripts": {
     "init": "lerna init",
-    "changed:lerna": "lerna changed",
+    "changed:lerna": "lerna changed -- since HEAD~1",
     "custom:changed": "node changed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

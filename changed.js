@@ -16,14 +16,14 @@ function getChanged() {
     const { stdout: GIT_BRANCH } = shell.exec(GIT_BRANCH_COMMAND, {
       silent: true,
     });
-    // console.log("GIT_BRANCH", GIT_BRANCH.trim());
+    console.log("GIT_BRANCH", GIT_BRANCH.trim());
 
     const COMMIT_HASH = `git merge-base ${GIT_BRANCH.trim()}  ${GIT_LATEST_TAG.trim()}`;
-    // console.log(COMMIT_HASH);
+    console.log(COMMIT_HASH);
     const { stdout: LAST_HASH } = shell.exec(COMMIT_HASH, {
       silent: true,
     });
-    // console.log("LAST_HASH", LAST_HASH);
+    console.log("LAST_HASH", LAST_HASH);
 
     const changedPackages = `npx lerna ls -p --since ${LAST_HASH.trim()} --include-dependents`;
 
