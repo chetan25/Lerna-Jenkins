@@ -8,6 +8,7 @@ pipeline {
             steps {
                 script { 
                     echo 'Checking Changes'
+                    sh 'npm ci'
                     sh 'npm run custom:changed'
                 }
             }    

@@ -44,7 +44,9 @@ const main = () => {
   packagesPath.forEach((package) => {
     if (package) {
       shell.cd(`${package}`);
+      shell.echo("Running scripts for " + package);
       shell.exec("pwd");
+      shell.exec("npm ci");
       shell.exec("npm run check");
     }
   });
