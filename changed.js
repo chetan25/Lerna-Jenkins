@@ -25,8 +25,9 @@ function getChanged() {
     });
     console.log("LAST_HASH", LAST_HASH);
 
-    const changedPackages = `npx lerna ls -p --since ${LAST_HASH.trim()} --include-dependents`;
+    // const changedPackages = `npx lerna ls -p --since ${LAST_HASH.trim()} --include-dependents`;
 
+    const changedPackages = `npx lerna ls -p -- since HEAD~1 --include-dependents`;
     // const changed = execSync(changedPackages).toString();
     const { stdout: changed } = shell.exec(changedPackages);
     console.log("changed", changed);
