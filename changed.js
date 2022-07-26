@@ -42,15 +42,25 @@ const main = () => {
   const packagesPath = changedPackages.split("\n");
   console.log(changedPackages.split("\n"));
 
+  // will be used by lerna to publish packages
+  const packagesToUpdate = [];
   packagesPath.forEach((package) => {
     if (package) {
       shell.cd(`${package}`);
       shell.echo("Running scripts for " + package);
       shell.exec("pwd");
       shell.exec("npm ci");
-      shell.exec("npm run check");
+      const { stdout, stderr, code } = shell.exec("npm run check");
+      console.log(code, "code ");
+      console.log(stdout, "stdout");
+      if (code < 1) {
+        packagesToUpdate.push(package);
+      }
     }
   });
+  console.log(packagesToUpdate);
+  //  npx lerna publish --skip-npm --yes minor
+  // npx lerna version --ignore-changes 'D:\Programming\git-jenkins\lerna-jenkins\packages\appB'
 };
 
 main();
