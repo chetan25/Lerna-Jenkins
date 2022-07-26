@@ -1,0 +1,33 @@
+0 silly argv {
+0 silly argv   _: [ 'ls' ],
+0 silly argv   p: true,
+0 silly argv   parseable: true,
+0 silly argv   since: '$LAST_HASH',
+0 silly argv   'include-dependents': true,
+0 silly argv   includeDependents: true,
+0 silly argv   lernaVersion: '5.2.0',
+0 silly argv   '$0': 'node_modules\\lerna\\cli.js'
+0 silly argv }
+1 notice cli v5.2.0
+2 verbose rootPath D:\Programming\git-jenkins\lerna-jenkins
+3 warn EWORKSPACES Workspaces exist in the root package.json, but Lerna is not configured to use them.
+3 warn EWORKSPACES To fix this and have Lerna use workspaces to resolve packages, set `useWorkspaces: true` in lerna.json.
+4 warn EPACKAGES No packages defined in lerna.json. Defaulting to packages in packages/*
+5 notice filter changed since "$LAST_HASH"
+6 notice filter including dependents
+7 silly hasTags
+8 verbose hasTags true
+9 silly git-describe.sync "v1.1.0-0-g5156650-dirty" => {"lastTagName":"v1.1.0","lastVersion":"v1.1.0","refCount":"0","sha":"5156650","isDirty":true}
+10 info Looking for changed packages since $LAST_HASH
+11 silly checking diff packages/appA
+12 error Error: Command failed with exit code 128: git diff --name-only $LAST_HASH -- packages/appA
+12 error fatal: bad revision '$LAST_HASH'
+12 error     at makeError (D:\Programming\git-jenkins\lerna-jenkins\node_modules\execa\lib\error.js:60:11)
+12 error     at Function.module.exports.sync (D:\Programming\git-jenkins\lerna-jenkins\node_modules\execa\index.js:194:17)
+12 error     at Object.execSync (D:\Programming\git-jenkins\lerna-jenkins\node_modules\@lerna\child-process\index.js:39:16)
+12 error     at diffSinceIn (D:\Programming\git-jenkins\lerna-jenkins\node_modules\@lerna\collect-updates\lib\make-diff-predicate.js:75:23)
+12 error     at hasDiffSinceThatIsntIgnored (D:\Programming\git-jenkins\lerna-jenkins\node_modules\@lerna\collect-updates\lib\make-diff-predicate.js:34:18)
+12 error     at isCandidate (D:\Programming\git-jenkins\lerna-jenkins\node_modules\@lerna\collect-updates\collect-updates.js:113:77)
+12 error     at D:\Programming\git-jenkins\lerna-jenkins\node_modules\@lerna\collect-updates\lib\collect-packages.js:24:9
+12 error     at Map.forEach (<anonymous>)
+12 error     at collectPackages (D:\Programming\git-jenkins\lerna-jenkins\node_modules\@lerna\collect-updates\lib\collect-packages.js:23:12)
