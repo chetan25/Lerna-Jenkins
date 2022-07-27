@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "init": "npm ci",
-    "check": "echo \"In Package B\" && exit 1",
+    "check": "echo \"In Package B\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
