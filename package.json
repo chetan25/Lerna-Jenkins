@@ -7,6 +7,7 @@
     "init": "lerna init",
     "changed:lerna": "lerna changed -- since HEAD~1",
     "custom:changed": "node changed.js",
+    "publish": "npx lerna publish --yes --skip-npm minor",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

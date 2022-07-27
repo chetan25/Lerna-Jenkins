@@ -1,12 +1,12 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "useNx": false,
-  "useWorkspaces": true,
   "packages": ["packages/*"],
-  "version": "0.0.0",
+  "version": "independent",
   "command": {
     "version": {
-      "allowBranch": "main"
+      "allowBranch": "main",
+      "message": "chore(released): Published a new version %v"
     }
   }
 }

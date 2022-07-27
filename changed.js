@@ -42,26 +42,32 @@ const main = () => {
   const changedPackages = JSON.parse(getChanged());
   // const packagesPath = changedPackages.split("\n");
   console.log(typeof changedPackages);
+  if (!changedPackages.length) {
+    throw new Error("No Packages to publish");
+  }
 
   // will be used by lerna to publish packages
-  const packagesToUpdate = [];
-  let canPublish = true;
+  const packagesToUpdate = "{";
   changedPackages.forEach((package) => {
     if (package) {
-      shell.cd(`${package.location}`);
-      shell.echo("Running scripts for " + package.name);
-      shell.exec("pwd");
-      shell.exec("npm ci");
-      const { stdout, stderr, code } = shell.exec("npm run check");
-      console.log(code, "code ");
-      console.log(stdout, "stdout");
-      if (code < 1) {
-        packagesToUpdate.push(package);
-        canPublish = false;
-      }
+      packagesToUpdate += package.name + ",";
+      // shell.cd(`${package.location}`);
+      // shell.echo("Running scripts for " + package.name);
+      // shell.exec("pwd");
+      // shell.exec("npm ci");
     }
   });
   console.log(packagesToUpdate);
+
+  const { stdout, stderr, code } = shell.exec(
+    `npx lerna exec --parallel --scope '${packagesToUpdate}' -- npm run check`
+  );
+  console.log(code, "code ");
+  console.log(stdout, "stdout");
+  if (code < 1) {
+    throw new Error("Error validating the packages");
+  }
+
   // if (packagesToUpdate.length )
   //  npx lerna publish --skip-npm --yes minor
 

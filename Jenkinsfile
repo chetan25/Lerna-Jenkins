@@ -1,20 +1,48 @@
+def shoulDeploy = false;
 pipeline {
     agent any
 
     tools {nodejs "Node"}
 
     stages {
+        stage("CLean checkout") {
+            steps {
+                script {
+                    echo "checking out to main"
+                    sh 'git branch -r'
+                    sh 'git checkout main'
+                    sh "git fetch --depth=1 origin +refs/tags/*:refs/tags/*"
+                }
+            }
+        }
         stage('Create DraftPR') {
+            when { branch 'main' }
             steps {
                 script { 
-                    echo "checking out to main"
-                    sh "git checkout main"
-                    sh "git fetch --depth=1 origin +refs/tags/*:refs/tags/*"
-                    echo 'Checking Changes'
-                    sh 'npm ci'
-                    sh 'npm run custom:changed'
+                    try {
+                        echo 'Checking Changes'
+                        sh 'npm ci'
+                        sh 'npm run custom:changed'
+                    } catch(e) {
+                        shoulDeploy = false
+                        echo 'Message: ${e.message}'
+                    }
                 }
             }    
+        }
+        stage('Release and Publish') {
+            when {
+                allOf {
+                    equals(actual: shoulDeploy, expected: true)
+                    branch 'main'
+                }
+            }
+            steps {
+                script {
+                    echo 'Starting release on changed packages'
+                    sh 'npm run publish'
+                }
+            }
         }
     }
 }
