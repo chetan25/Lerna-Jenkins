@@ -21,8 +21,8 @@ pipeline {
                 script { 
                     try {
                         echo 'Checking Changes'
-                        sh 'npm ci'
-                        sh 'npm run custom:changed'
+                        // sh 'npm ci'
+                        // sh 'npm run custom:changed'
                     } catch(e) {
                         shoulDeploy = false
                         echo 'Message: ${e.message}'
@@ -34,12 +34,25 @@ pipeline {
             when {
                 allOf {
                     branch 'main'
-                    changeset 'packages/appA/**'
+                    changeset 'packages/**'
                 }
             }
             steps {
                 script {
-                    echo 'Starting package A'
+                    echo 'Starting packages work'
+                }
+            }
+        }
+        stage('Normal work') {
+            when {
+                allOf {
+                    branch 'main'
+                    not { changeset 'packages/**' }
+                }
+            }
+            steps {
+                script {
+                    echo 'Starting other work'
                 }
             }
         }
