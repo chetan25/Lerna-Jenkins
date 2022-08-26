@@ -30,6 +30,19 @@ pipeline {
                 }
             }    
         }
+        stage('Check changeset') {
+            when {
+                allOf {
+                    branch 'main'
+                    changeset 'packages/appA/**'
+                }
+            }
+            steps {
+                script {
+                    echo 'Starting package A'
+                }
+            }
+        }
         stage('Release and Publish') {
             when {
                 allOf {
