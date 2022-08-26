@@ -62,8 +62,8 @@ const main = () => {
   const { stdout, stderr, code } = shell.exec(
     `npx lerna exec --parallel --scope '${packagesToUpdate}' -- npm run check`
   );
-  console.log(code, "code ");
-  console.log(stdout, "stdout");
+  // console.log(code, "code ");
+  // console.log(stdout, "stdout");
   if (code < 1) {
     throw new Error("Error validating the packages");
   }
